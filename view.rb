@@ -7,6 +7,12 @@ class View
     puts "1. Login\n2.Register\n3.Exit"
   end#initialize
 
+  def welcome(type_user)
+    puts "Welcome #{type_user}"
+    puts "----------------------------------------------------------------------"
+  end
+
+
   def login
     aux = {}
     puts "email:"
@@ -28,7 +34,30 @@ class View
     aux 
   end
  
+  def products(object_products, type_user)
+    welcome(type_user)
+    object_products.each do |product|
+      puts "id: #{product.id}\nproduct: #{product.name}\nstock: #{product.stock}\n"
+    end
+  end#products
 
+  def menu_vendor(type_user)
+    welcome(type_user)
+    puts "select number option:"
+    puts "1. View products"
+    puts "2. Sell product."
+    choice = gets.chomp
+    choice
+  end
+
+  def sell
+    aux = {}
+    puts "id product:"
+    aux["id"] = gets.chomp
+    puts "pieces"
+    aux["pieces"] = gets.chops
+    aux
+  end
 
 end#class
 
