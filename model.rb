@@ -3,10 +3,10 @@ require 'csv'
 class User
   attr_accessor :email, :password, :type_user
   
-  def initialize(email, password, type_user)
+  def initialize(type_user, email, password)
+    @type_user = type_user
     @email = email
     @password = password
-    @type_user = type_user
   end
 
 end#class User
@@ -14,11 +14,11 @@ end#class User
 
 
 class Product
-  attr_accessor :id, :name, :lot
-  def initialize(id, name, lot)
+  attr_accessor :id, :name, :stock
+  def initialize(id, name, stock)
     @id = id
     @name = name
-    @lot = lot
+    @stock = stock
   end
 end#class Product
 
@@ -46,7 +46,7 @@ class CsvFiles
 
   def add_user(user)
     CSV.open("users.csv", "a+") do |csv|
-      csv << [user.email, user.password, user.type_user]
+      csv << [user.type_user, user.email, user.password]
     end#CSV
   end#mtd add_user
 
@@ -57,7 +57,7 @@ class CsvFiles
         products << Product.new(array[0], array[1])
       end#each
     products    
-  end
+  end#mtd read_products
 
   def writer_products(array_objects_products)
     CSV.open("users.csv", "wb") do |csv|
@@ -70,7 +70,7 @@ class CsvFiles
  
   def add_product(product)
     CSV.open("product.csv", "a+") do |csv|
-      csv << [product.id, product.name, product.lot]
+      csv << [product.id, product.name, product.stock]
     end#CSV
   end#mtd add_product 
 
